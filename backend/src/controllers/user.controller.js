@@ -28,7 +28,11 @@ const addUser = asyncHandler(async (req, res) => {
         .json(
           new ApiRespone(
             201,
-            { userId: results.insertId },
+            { userId: results.insertId,
+              name,
+              email,
+              phone
+             },
             "User Added successfully."
           )
         );
@@ -82,24 +86,28 @@ const listUsersByNameDesc = asyncHandler(async (req, res) => {
 });
 
 const deleteUser = asyncHandler(async (req, res) => {
-  // TODO: check for user existance
-
   const { id } = req.body;
 
-  await connection.query(
-    `DELETE FROM users WHERE id = ${id}`,
-    function (err, result, fields) {
-      if (err) {
-        res.status(500).json(new ApiError(500, "Error while deleting users"));
-        throw new ApiError(500, "Error while deleting users");
+  try {
+    await connection.query(
+      `DELETE FROM users WHERE id = ${id}`,
+      function (err, result, fields) {
+        if (err) {
+          console.error("Error while deleting user:", err);
+          throw new ApiError(500, "Error while deleting user");
+        }
+        if (result) {
+          console.log(result);
+          res.status(200).json(new ApiRespone(200, result, "User Deleted."));
+        }
       }
-      if (result) {
-        console.log(result);
-        res.status(200).json(new ApiRespone(200, result, "User Deleted."));
-      }
-    }
-  );
+    );
+  } catch (error) {
+    console.error("Caught an error while deleting user:", error);
+    res.status(500).json(new ApiError(500, "Internal server error"));
+  }
 });
+
 
 const searchUser = asyncHandler(async (req, res) => {
   const { searchTerm } = req.body;

@@ -1,5 +1,6 @@
 // src/components/UserForm.js
 import React, { useState } from 'react';
+import '../App.css'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../features/userSlice';
 

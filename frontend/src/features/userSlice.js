@@ -1,16 +1,15 @@
-// src/features/userSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../api/api.js';
 
 // Thunks
 export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => {
   const response = await api.get('/users/listUsers');
-  return response.data.data; // Adjust based on your API response structure
+  return response.data.data; 
 });
 
 export const addUser = createAsyncThunk('user/addUser', async (user) => {
   const response = await api.post('/users/addUser', user);
-  return response.data.data; // Adjust based on your API response structure
+  return response.data.data;
 });
 
 export const deleteUser = createAsyncThunk('user/deleteUser', async (userId) => {
@@ -21,10 +20,9 @@ export const deleteUser = createAsyncThunk('user/deleteUser', async (userId) => 
 
 export const updateUser = createAsyncThunk('user/updateUser', async (user) => {
   const response = await api.put('/users/editUser', user);
-  return response.data.data; // Adjust based on your API response structure
+  return response.data.data;
 });
 
-// Slice
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -53,7 +51,11 @@ const userSlice = createSlice({
         state.users = state.users.filter(user => user.id !== action.payload);
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        const index = state.users.findIndex(user => user.id === action.payload.id);
+        const index = state.users.findIndex(user => {
+          console.log(user.id);
+          return user.id === action.payload.id;
+        });
+
         if (index !== -1) {
           state.users[index] = action.payload;
         }

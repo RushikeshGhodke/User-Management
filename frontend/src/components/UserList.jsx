@@ -25,6 +25,7 @@ const UserList = () => {
   }, [userStatus, dispatch]);
 
   const handleDelete = (userId) => {
+    console.log(userId);
     dispatch(deleteUser(userId));
   };
 
@@ -67,8 +68,8 @@ const UserList = () => {
   } else if (userStatus === 'succeeded') {
     content = (
       <ul>
-        {users.map(user => (
-          <li key={uuidv4()}>
+        {users.map((user, i) => (
+          <li key={i}>
             {editUserId === user.id ? (
               <>
                 <input
@@ -96,7 +97,10 @@ const UserList = () => {
               <>
                 {user.name} - {user.email} - {user.phone}
                 <button onClick={() => handleEdit(user)}>Edit</button>
-                <button onClick={() => handleDelete(user.id)}>Delete</button>
+                <button onClick={() => {
+                  console.log("Line No. 101: ", user);
+                  handleDelete(user.id)
+                  }}>Delete</button>
               </>
             )}
           </li>

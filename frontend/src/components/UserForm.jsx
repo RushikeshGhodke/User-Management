@@ -36,6 +36,7 @@ const UserForm = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
+        autoFocus="true"
       />
       <input
         type="phone"

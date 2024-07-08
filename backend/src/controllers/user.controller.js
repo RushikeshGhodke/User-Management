@@ -28,7 +28,7 @@ const addUser = asyncHandler(async (req, res) => {
         .json(
           new ApiRespone(
             201,
-            { userId: results.insertId,
+            { id: results.insertId,
               name,
               email,
               phone
@@ -141,7 +141,7 @@ const editUser = asyncHandler(async(req, res) => {
             return res.status(500).json({ error: "Internal server error" });
           }
     
-          res.status(200).json(new ApiRespone(200, results, `User Updated.`));
+          res.status(200).json(new ApiRespone(200, {id, name, email, phone}, `User Updated.`));
     });
 });
 

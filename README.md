@@ -14,3 +14,6 @@ Tech Stack
 - Backend: Node.js, Express.js
 - Database: MySQL
 - PDF Generation: jsPDF
+
+Contributions
+https://github.com/RahiBhand/

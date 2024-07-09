@@ -11,6 +11,7 @@ Main Functionalities
 
 Tech Stack
 - Frontend: React.js
+- State Management: Redux, Redux Toolkit
 - Backend: Node.js, Express.js
 - Database: MySQL
 - PDF Generation: jsPDF

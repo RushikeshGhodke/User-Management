@@ -45,6 +45,7 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addUser.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.users.push(action.payload);
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
